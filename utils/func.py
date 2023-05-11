@@ -2,7 +2,7 @@ import json
 import os.path
 from datetime import datetime
 
-# a = os.path.join('operations.json')
+a = os.path.join('../utils/operations.json')
 
 
 def load_bank_report(filename):
@@ -12,8 +12,6 @@ def load_bank_report(filename):
         bank_data = json.load(file)
         return bank_data
 
-
-# print(load_bank_report(a))
 
 def sort_operations(exe_operations):
     """Формируем список с учетом выполненных операций"""
@@ -34,37 +32,22 @@ def sort_operations_by_time(list_operations):
     return sorted_data[:5]
 
 
-# b = load_bank_report(a)
-# print(b)
-# c = sort_operations(b)
-# print(c)
-# d = sort_operations_by_time(c)
-# # print(d)
-
 def format_date(date):
     """Преобразую дату из одного формата в требуемый согласно ТЗ заказчика"""
 
     date_new = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
     return date_new
 
-# e = format_date(d[0]["date"])
-# print(e)
-
 
 def hide_card_numbers(operations):
     """Скрываем часть номера карты и счета за звездочками"""
 
     number = operations.split()[-1]
+    name = operations.split()[0]
     if len(number) == 16:
-        card_number = number[:4] + " " + number[4:6] + "** ****" + number[-4]
+        card_number = name[:] + " " + number[:4] + " " + number[4:6] + "** ****" + number[-4]
         return card_number
 
     else:
-        card_number = "**" + number[-4:]
+        card_number = name[:] + " " + "**" + number[-4:]
         return card_number
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 import pytest
 
-from main import a
-from utils.func import load_bank_report, sort_operations, sort_operations_by_time, format_date, hide_card_numbers
+from utils.func import load_bank_report, sort_operations, sort_operations_by_time, format_date, hide_card_numbers, a
 
 
 def test_list():
@@ -28,12 +27,12 @@ def test_sort_operations_by_time(test_data):
     expected_result = [{"state": "EXECUTED",
                         "date": "2019-08-26T10:50:58.294041",
                         "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}
-                        },
+                                            },
                         "description": "Перевод организации", "from": "Maestro 1596837868705199",
                         "to": "Счет 64686473678894779589"},
                        {"date": "2019-07-03T18:35:29.512364",
-                       "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}
-                        },
+                        "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}
+                                            },
                         "description": "Перевод организации", "from": "MasterCard 7158300734726758",
                         "to": "Счет 35383033474447895560"},
                        {"date": "2019-04-04T23:20:05.206878",
@@ -55,16 +54,12 @@ def test_sort_operations_by_time(test_data):
 
 
 def test_format_date(test_data):
-    data = format_date(test_data)
-    assert [i["date"] for i in data] == ["26.08.2019"]
+    assert format_date("2019-08-26T10:50:58.294041") == ("26.08.2019")
 
 
-# [{"state": "EXECUTED", "date": "26.08.2019",
-#              "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}
-#              }, "description": "Перевод организации", "from": "Maestro 1596837868705199",
-#              "to": "Счет 64686473678894779589"}]
-
-
-def test_hide_card_numbers(test_data):
-    data = hide_card_numbers(test_data)
-    assert data == ['1596 83** ****5, **9589']
+def test_hide_card_numbers():
+    # data = hide_card_numbers(test_data)
+    # assert data == ['Maestro 1596 83** ****5 -> Счет **9589']
+    # operations = [{'from': 'Maestro 1596837868705199', 'to': 'Счет 64686473678894779589'}]
+    assert hide_card_numbers('Maestro 1596837868705199') == ('Maestro 1596 83** ****5')
+    assert hide_card_numbers('Счет 64686473678894779589') == ('Счет **9589')
