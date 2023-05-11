@@ -1,5 +1,4 @@
 import pytest
-
 from utils.func import load_bank_report, sort_operations, sort_operations_by_time, format_date, hide_card_numbers, a
 
 

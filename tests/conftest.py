@@ -57,7 +57,7 @@ def test_data():
             "state": "EXECUTED",
             "date": "2019-03-23T01:09:46.296404",
             "operationAmount": {
-                "amount": "43318.34","currency": {"name": "руб.", "code": "RUB"}
+                "amount": "43318.34","currency": {"name": "руб.",  "code": "RUB"}
             },
             "description": "Перевод со счета на счет",
             "from": "Счет 44812258784861134719",

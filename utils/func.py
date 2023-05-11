@@ -38,7 +38,6 @@ def format_date(date):
     date_new = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
     return date_new
 
-
 def hide_card_numbers(operations):
     """Скрываем часть номера карты и счета за звездочками"""
 
